@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Washingt0n - Бэкенд Разработчик</title> 
+    <style> 
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000, #660000); /* Черно-красный градиент */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .welcome-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            opacity: 1;
+            animation: fadeOut 4s ease forwards;
+        }
+
+        .welcome-text {
+            font-size: 4em;
+            color: #ff4c4c; /* Красный текст приветствия */
+            animation: zoomInOut 3s ease forwards;
+        }
+
+        .container {
+            display: none;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1a1a1a; /* Темный фон контейнера */
+            color: #e0e0e0; /* Светлый текст */
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Красная тень */
+            animation: fadeInContent 2s ease-in-out;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            background: url('images/photo_5389045940926668615_x.jpg') no-repeat center center;
+            background-size: cover;
+            animation: moveUp 2s ease-out;
+            margin-bottom: 10px;
+        }
+
+        .profile-info h2 {
+            color: #ff4c4c; /* Красный цвет ника */
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            background-color: #660000; /* Темно-красный цвет вкладок */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px 5px 0 0;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+
+        .tab:hover {
+            background-color: #cc0000; /* Ярко-красный при наведении */
+        }
+
+        .tab-content {
+            display: none;
+            text-align: left;
+            padding: 20px;
+            border-radius: 0 0 12px 12px;
+            background-color: #0d0d0d; /* Черный фон контента вкладок */
+            color: #e0e0e0;
+        }
+
+        .active-tab {
+            display: block;
+        }
+
+        @keyframes zoomInOut {
+            0% { transform: scale(0); opacity: 1; }
+            70% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(50); opacity: 0; }
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes moveUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            100% { opacity: 0; visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="welcome-container">
+    <div class="welcome-text">WELCOME</div>
+</div>
+
+<div class="container">
+    <div class="profile">
+        <div class="avatar"></div>
+        <div class="profile-info">
+            <h2>Washingt0n</h2>
+            <p>Я бэкенд разработчик из Украины, специализирующийся на Python и различных технологиях для создания мощных и эффективных приложений.</p>
+            <p>В своей работе я сосредоточен на создании надежных систем, которые могут справляться с различными задачами, будь то обработка данных, разработка API или безопасность. Мои проекты включают в себя:</p>
+        </div>
+    </div>
+    <div class="tabs">
+        <div class="tab" onclick="window.location.href='obomne.html'">Обо мне</div>
+        <div class="tab" onclick="redirectToDevelopments()">Разработки</div>
+        <div class="tab" onclick="showTab('network')">Сети</div>
+    </div>
+    <div id="about" class="tab-content">
+        <h1>Привет! Я Washingt0n</h1>
+        <p>Я бэкенд разработчик из Украины, специализирующийся на Python и различных технологиях для создания мощных и эффективных приложений.</p>
+    </div>
+    <div id="developments" class="tab-content">
+        <h1>Разработки</h1>
+        <p>В своей работе я сосредоточен на создании надежных систем, которые могут справляться с различными задачами, будь то обработка данных, разработка API или безопасность.</p>
+        <ul>
+            <li>Разработка программ для работы с сетевыми и системными функциями.</li>
+            <li>Создание инструментов для проверки безопасности и защиты данных.</li>
+            <li>Работа над проектами по автоматизации процессов и оптимизации работы систем.</li>
+        </ul>
+    </div>
+    <div id="network" class="tab-content">
+        <h1>Сети</h1>
+        <p>Если вам нужна помощь в создании сложных и надежных систем или вы хотите обсудить интересные проекты, не стесняйтесь связаться со мной!</p>
+        <p>Discord-washingt0ns</p>
+    </div>
+</div>
+
+<script>
+    setTimeout(function() {
+        document.querySelector('.welcome-container').style.display = 'none';
+        document.querySelector('.container').style.display = 'block';
+    }, 3000);
+
+    function showTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active-tab');
+        });
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.getElementById(tabId).classList.add('active-tab');
+        event.target.classList.add('active');
+    }
+
+    function redirectToDevelopments() {
+        window.location.href = 'index3.html';
+    }
+</script>
+
+</body> 
+</html>
