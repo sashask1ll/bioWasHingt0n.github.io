@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Washingt0n - Мои Проекты</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('images/program_screenshot.jpg') no-repeat center center fixed; /* Задний фон - скрин программы */
+            background-size: cover;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Затемнение фона */
+        }
+
+        .projects-container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            padding: 30px;
+            background-color: #111;
+            color: #ff4c4c; /* Красно-черная тема */
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .project {
+            text-align: center;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .project img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .project h3 {
+            margin: 15px 0 10px;
+            font-size: 1.5em;
+            color: #ff4c4c; /* Цвет заголовков */
+        }
+
+        .project p {
+            font-size: 1.1em;
+            color: #ccc;
+        }
+
+        .btn-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ff4c4c;
+            color: #fff;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-center:hover {
+            background-color: #e60000;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .functionalities {
+            margin-left: 20px;
+        }
+
+        .functionalities h2 {
+            color: #ff4c4c;
+            font-size: 2em;
+        }
+
+        .functionalities ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .functionalities li {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            .projects-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .functionalities {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<div class="projects-container">
+    <!-- Проект слева -->
+    <div class="project">
+        <img src="images/expecntion.png" alt="Создание программы Expection">
+        <h3>Создание программы Expection</h3>
+        <p>Программа поможет вам найти информацию о человеке</p>
+        <p>Version: BETA</p>
+    </div>
+
+    <!-- Функционал справа -->
+    <div class="functionalities">
+        <h2>Функционал программы</h2>
+        <ul>
+            <li>Поиск информации о людях</li>
+            <li>Анализ данных из соцсетей</li>
+            <li>Сканирование документов</li>
+            <li>И многое другое...</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Кнопка купить в центре экрана -->
+<a href="but.html" class="btn-center">Купить!</a>
+
+</body>
+</html>

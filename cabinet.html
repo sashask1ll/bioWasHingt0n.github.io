@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Information</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000; /* Черный фон */
+            color: #fff; /* Белый текст */
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Отключение прокрутки для создания эффекта полноэкранного фона */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 5% auto;
+            padding: 20px;
+            background-color: #222; /* Темно-серый фон для контейнера */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+
+        h1 {
+            color: #e60012; /* Красный цвет заголовка */
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .info {
+            margin: 15px 0;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .info label {
+            font-weight: bold;
+            color: #e60012; /* Красный цвет для меток */
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .info p {
+            margin: 0;
+            font-size: 1.2em;
+            background: #333; /* Темно-серый фон для текста */
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Анимации */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Стиль кнопок */
+        button {
+            background-color: #e60012; /* Красный фон кнопок */
+            color: #fff; /* Белый текст */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #c7000f; /* Более темный красный при наведении */
+            transform: scale(1.05); /* Увеличение кнопки при наведении */
+        }
+
+        button:active {
+            background-color: #a3000a; /* Еще более темный красный при нажатии */
+            transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+        }
+
+        /* Эффект для фона */
+        .background-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+            opacity: 0.5;
+            z-index: -1;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background: radial-gradient(circle, rgba(255,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+            }
+            100% {
+                background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+            }
+        }
+
+        .toggle-button {
+            background-color: #444; /* Темно-серый фон кнопки переключения */
+            color: #fff; /* Белый текст */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 20px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .toggle-button:hover {
+            background-color: #555; /* Более светлый серый при наведении */
+            transform: scale(1.05); /* Увеличение кнопки при наведении */
+        }
+
+        .toggle-button:active {
+            background-color: #333; /* Еще более темный серый при нажатии */
+            transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="background-effect"></div>
+
+<div class="container">
+    <h1>Информация о Пользователе</h1>
+    <div class="info">
+        <label for="uid">UID:</label>
+        <p id="uid">Loading...</p>
+    </div>
+    <div class="info">
+        <label for="group">Группа:</label>
+        <p id="group">Loading...</p>
+    </div>
+    <div class="info">
+        <label for="email">Email:</label>
+        <p id="email">Loading...</p>
+    </div>
+    <div class="info">
+        <label for="expiry">Срок действия программы:</label>
+        <p id="expiry">Loading...</p>
+    </div>
+    <div style="text-align: center;">
+        <button onclick="refreshInfo()">Обновить</button>
+        <button class="toggle-button" onclick="toggleEmail()">Скрыть Email</button>
+    </div>
+</div>
+
+<script>
+    const userDatabase = {
+        'sashask1llive@gmail.com': { uid: '1', status: 'DEVELOPER' },
+        'kalantaenkooleksandr619@gmail.com': { uid: '2', status: 'Helper' },
+        'example2@example.com': { uid: '3', status: 'USER' },
+        'example3@example.com': { uid: '4', status: 'ADMIN' }
+        // Добавьте другие email, UID и статусы по мере необходимости
+    };
+
+    let isEmailVisible = true;
+
+    function getUserInfo(email) {
+        return userDatabase[email] || { uid: 'N/A', status: 'USER' }; // Стандартный UID и статус, если email не найден
+    }
+
+    function getEmail() {
+        // Пример получения email из системы регистрации
+        // В реальной системе это может быть получено через сервер или куки
+        // Для демонстрации используется статический email
+        return 'sashask1llive@gmail.com'; // Пример email
+    }
+
+    function getExpiryDate() {
+        // Пример срока действия (через 30 дней от текущей даты)
+        let expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 30);
+        return expiryDate.toLocaleDateString();
+    }
+
+    function refreshInfo() {
+        let email = getEmail();
+        let userInfo = getUserInfo(email);
+        document.getElementById('uid').textContent = userInfo.uid;
+        document.getElementById('group').textContent = userInfo.status;
+        document.getElementById('email').textContent = isEmailVisible ? email : 'Hidden';
+        document.getElementById('expiry').textContent = getExpiryDate();
+    }
+
+    function toggleEmail() {
+        isEmailVisible = !isEmailVisible;
+        refreshInfo(); // Refresh the info to reflect the email visibility change
+    }
+
+    document.addEventListener('DOMContentLoaded', refreshInfo);
+</script>
+
+</body>
+</html>
